@@ -29,6 +29,7 @@ exports.getWhether = asyncHandler(async (request, response, next) => {
         }
       }
     );
+     
     return;
   }
 
@@ -42,11 +43,13 @@ exports.getWhether = asyncHandler(async (request, response, next) => {
         success: true,
         data: responses
       });
+      return;
     } 
       response.status(400).json({
         success: false,
         data: []
       });
+      return;
 });
 
 async function getAllUrls(urls) {
