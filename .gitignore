@@ -1,0 +1,10 @@
+node_modules/
+.DS_Store
+*.log
+haters/
+.next/
+.cache/
+ dist/
+.build/
+layout.md
+variables.env
