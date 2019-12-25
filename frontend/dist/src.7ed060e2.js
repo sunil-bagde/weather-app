@@ -39283,11 +39283,12 @@ var Weather = function Weather(_ref) {
     return null;
   }
 
-  return (_weather$data = weather.data) === null || _weather$data === void 0 ? void 0 : _weather$data.map(function (item) {
+  return (_weather$data = weather.data) === null || _weather$data === void 0 ? void 0 : _weather$data.map(function (item, index) {
     var _todayWeather$, _location$city, _ref3, _ref4, _currentData$conditio, _currentData$wind;
 
-    console.log(item);
-
+    /*
+      Using index as key its not proper way but api dont have any Unique Indentification
+    */
     var _ref2 = item !== null && item !== void 0 ? item : {},
         _ref2$location = _ref2.location,
         location = _ref2$location === void 0 ? {} : _ref2$location,
@@ -39303,7 +39304,8 @@ var Weather = function Weather(_ref) {
     });
     var firstForcast = (_todayWeather$ = todayWeather[0]) !== null && _todayWeather$ !== void 0 ? _todayWeather$ : {};
     return hasLocation ? _react.default.createElement("div", {
-      className: "card weather-card"
+      className: "card weather-card",
+      key: index
     }, _react.default.createElement("div", {
       className: "card-body pb-1"
     }, _react.default.createElement("h4", {
@@ -39383,7 +39385,121 @@ exports.default = _default2;
   var leaveModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.leaveModule : undefined;
   leaveModule && leaveModule(module);
 })();
-},{"react":"../node_modules/react/index.js","react-bootstrap/Alert":"../node_modules/react-bootstrap/esm/Alert.js","./Weather.css":"../src/components/Weather/Weather.css"}],"../src/App.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap/Alert":"../node_modules/react-bootstrap/esm/Alert.js","./Weather.css":"../src/components/Weather/Weather.css"}],"../src/components/ErrorBoundary.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+(function () {
+  var enterModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.enterModule : undefined;
+  enterModule && enterModule(module);
+})();
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var __signature__ = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.default.signature : function (a) {
+  return a;
+};
+
+var ErrorBoundary =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(ErrorBoundary, _React$Component);
+
+  function ErrorBoundary(props) {
+    var _this;
+
+    _classCallCheck(this, ErrorBoundary);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ErrorBoundary).call(this, props));
+    _this.state = {
+      hasError: false
+    };
+    return _this;
+  }
+
+  _createClass(ErrorBoundary, [{
+    key: "componentDidCatch",
+    value: function componentDidCatch(error, errorInfo) {
+      // You can also log the error to an error reporting service
+      logErrorToMyService(error, errorInfo);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.state.hasError) {
+        // You can render any custom fallback UI
+        return _react.default.createElement("h1", null, "Something went wrong.");
+      }
+
+      return this.props.children;
+    }
+  }, {
+    key: "__reactstandin__regenerateByEval",
+    // @ts-ignore
+    value: function __reactstandin__regenerateByEval(key, code) {
+      // @ts-ignore
+      this[key] = eval(code);
+    }
+  }], [{
+    key: "getDerivedStateFromError",
+    value: function getDerivedStateFromError(error) {
+      // Update state so the next render will show the fallback UI.
+      return {
+        hasError: true
+      };
+    }
+  }]);
+
+  return ErrorBoundary;
+}(_react.default.Component);
+
+var _default = ErrorBoundary;
+var _default2 = _default;
+exports.default = _default2;
+;
+
+(function () {
+  var reactHotLoader = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.default : undefined;
+
+  if (!reactHotLoader) {
+    return;
+  }
+
+  reactHotLoader.register(ErrorBoundary, "ErrorBoundary", "/Users/sunilbagde/Code/interview/wheter-app/frontend/src/components/ErrorBoundary.js");
+  reactHotLoader.register(_default, "default", "/Users/sunilbagde/Code/interview/wheter-app/frontend/src/components/ErrorBoundary.js");
+})();
+
+;
+
+(function () {
+  var leaveModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.leaveModule : undefined;
+  leaveModule && leaveModule(module);
+})();
+},{"react":"../node_modules/react/index.js"}],"../src/App.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -39412,6 +39528,8 @@ var _Navbar = _interopRequireDefault(require("./components/Navbar"));
 var _CityList = _interopRequireDefault(require("./components/CityList"));
 
 var _Weather = _interopRequireDefault(require("./components/Weather"));
+
+var _ErrorBoundary = _interopRequireDefault(require("./components/ErrorBoundary"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -39443,7 +39561,7 @@ var App = function App(_ref) {
     return state.city;
   });
   var dispatch = (0, _reactRedux.useDispatch)();
-  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement("div", {
+  return _react.default.createElement(_react.default.Fragment, null, _react.default.createElement(_ErrorBoundary.default, null, _react.default.createElement("div", {
     className: "container"
   }, _react.default.createElement(_Navbar.default, null), _react.default.createElement(_Container.default, null, _react.default.createElement(_Row.default, null, _react.default.createElement(_Col.default, {
     xs: 4
@@ -39460,7 +39578,7 @@ var App = function App(_ref) {
     xs: 8
   }, _react.default.createElement(_Weather.default, {
     weather: weather
-  }))))));
+  })))))));
 };
 
 __signature__(App, "useSelector{weather}\nuseSelector{city}\nuseDispatch{dispatch}", function () {
@@ -39490,7 +39608,7 @@ exports.default = _default2;
   var leaveModule = typeof reactHotLoaderGlobal !== 'undefined' ? reactHotLoaderGlobal.leaveModule : undefined;
   leaveModule && leaveModule(module);
 })();
-},{"react":"../node_modules/react/index.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-redux":"../node_modules/react-redux/es/index.js","./reducers/weather":"../src/reducers/weather.js","./lib/weatherService":"../src/lib/weatherService.js","./components/Navbar":"../src/components/Navbar.js","./components/CityList":"../src/components/CityList.js","./components/Weather":"../src/components/Weather/index.js"}],"../src/index.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-bootstrap/Container":"../node_modules/react-bootstrap/esm/Container.js","react-bootstrap/Row":"../node_modules/react-bootstrap/esm/Row.js","react-bootstrap/Col":"../node_modules/react-bootstrap/esm/Col.js","react-bootstrap/Button":"../node_modules/react-bootstrap/esm/Button.js","react-redux":"../node_modules/react-redux/es/index.js","./reducers/weather":"../src/reducers/weather.js","./lib/weatherService":"../src/lib/weatherService.js","./components/Navbar":"../src/components/Navbar.js","./components/CityList":"../src/components/CityList.js","./components/Weather":"../src/components/Weather/index.js","./components/ErrorBoundary":"../src/components/ErrorBoundary.js"}],"../src/index.js":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireDefault(require("react"));
@@ -39570,7 +39688,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65075" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54942" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

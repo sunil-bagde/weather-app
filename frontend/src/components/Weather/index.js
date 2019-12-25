@@ -8,8 +8,10 @@ const Weather = ({ weather, ...props }) => {
     return null;
   }
 
-  return weather.data?.map(item => {
-    console.log(item);
+  return weather.data?.map((item, index) => {
+    /*
+      Using index as key its not proper way but api dont have any Unique Indentification
+    */
     const {
       location = {},
       current_observation: currentData = {},
@@ -25,7 +27,7 @@ const Weather = ({ weather, ...props }) => {
     const firstForcast = todayWeather[0] ?? {};
 
     return hasLocation ? (
-      <div className="card weather-card">
+      <div className="card weather-card" key={index}>
         <div className="card-body pb-1">
           <h4 className="card-title font-weight-bold">{location.city ?? ""}</h4>
           <p className="card-text text-muted">

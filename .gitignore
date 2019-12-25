@@ -4,7 +4,8 @@ node_modules/
 haters/
 .next/
 .cache/
- dist/
+dist/
 .build/
 layout.md
 variables.env
+dist
