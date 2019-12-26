@@ -1,6 +1,6 @@
 const ErrorResponse = require("../utils/errorResponse");
 const asyncHandler = require("../middleware/async");
-const whetherRequest = require("../utils/weather");
+const weatherRequest = require("../utils/weather");
 const fetch = require("node-fetch");
 const CryptoJS = require("crypto-js");
 const dotenv = require("dotenv").config();
@@ -9,12 +9,12 @@ const queryString = require("query-string");
  @desc      Get  
  @route     GET /api/weather
 **/
-exports.getWhether = asyncHandler(async (request, response, next) => {
+exports.getWeather = asyncHandler(async (request, response, next) => {
   const city = request.query.city;
   const zip = request.query.zip;
   if (city) {
     const city = request.query.city;
-    whetherRequest.get(
+    weatherRequest.get(
       `https://weather-ydn-yql.media.yahoo.com/forecastrss?location=${city}&format=json`,
       null,
       null,
@@ -115,7 +115,7 @@ function fetchOauth(location) {
         return [k + '="' + oauth[k] + '"'];
       })
       .join(",");
-  return fetch(url + "?" + queryString.stringify(query), {
+    return fetch(url + "?" + queryString.stringify(query), {
     headers: {
       Authorization: auth_header,
       "X-Yahoo-App-Id": app_id

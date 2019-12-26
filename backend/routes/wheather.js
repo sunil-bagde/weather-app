@@ -1,6 +1,6 @@
 const express = require('express');
 const {
-  getWhether, 
+  getWeather, 
 } = require('../controllers/wheather');
  
 
@@ -9,6 +9,6 @@ const router = express.Router({ mergeParams: true });
 
 router
   .route('/')
-  .get(getWhether);
+  .get(getWeather);
 
 module.exports = router;
