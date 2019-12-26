@@ -1,10 +1,14 @@
-const ErrorResponse = require("../utils/errorResponse");
-const asyncHandler = require("../middleware/async");
-const weatherRequest = require("../utils/weather");
 const fetch = require("node-fetch");
 const CryptoJS = require("crypto-js");
 const dotenv = require("dotenv").config();
 const queryString = require("query-string");
+
+const ErrorResponse = require("../utils/errorResponse");
+const asyncHandler = require("../middleware/async");
+const weatherRequest = require("../utils/weather");
+
+const WEATHER_URL = "https://weather-ydn-yql.media.yahoo.com/forecastrss";
+
 /**
  @desc      Get  
  @route     GET /api/weather
@@ -15,7 +19,7 @@ exports.getWeather = asyncHandler(async (request, response, next) => {
   if (city) {
     const city = request.query.city;
     weatherRequest.get(
-      `https://weather-ydn-yql.media.yahoo.com/forecastrss?location=${city}&format=json`,
+      `${WEATHER_URL}?location=${city}&format=json`,
       null,
       null,
       function(err, data, result) {
@@ -29,27 +33,25 @@ exports.getWeather = asyncHandler(async (request, response, next) => {
         }
       }
     );
-     
+
     return;
   }
 
-    if(zip) {
-      const zipData = zip.split(",");
-      var responses = await getAllUrls(
-        zipData.map( ( item=>item.trim() ))
-        );
+  if (zip) {
+    const zipData = zip.split(",");
+    var responses = await getAllUrls(zipData.map(item => item.trim()));
 
-      response.status(200).json({
-        success: true,
-        data: responses
-      });
-      return;
-    } 
-      response.status(400).json({
-        success: false,
-        data: []
-      });
-      return;
+    response.status(200).json({
+      success: true,
+      data: responses
+    });
+    return;
+  }
+  response.status(400).json({
+    success: false,
+    data: []
+  });
+  return;
 });
 
 async function getAllUrls(urls) {
@@ -61,17 +63,15 @@ async function getAllUrls(urls) {
           .catch(err => console.log(err))
       )
     );
-
     return data;
   } catch (error) {
     console.log(error);
-
     throw error;
   }
 }
 function fetchOauth(location) {
   //
-  const url = "https://weather-ydn-yql.media.yahoo.com/forecastrss";
+  const url = WEATHER_URL;
   const method = "GET";
   const app_id = process.env.APP_ID;
   const consumer_key = process.env.CLIENT_ID;
@@ -89,7 +89,7 @@ function fetchOauth(location) {
   };
 
   const merged = { ...query, ...oauth };
-   
+
   // Note the sorting here is required
   const merged_arr = Object.keys(merged)
     .sort()
@@ -115,7 +115,7 @@ function fetchOauth(location) {
         return [k + '="' + oauth[k] + '"'];
       })
       .join(",");
-    return fetch(url + "?" + queryString.stringify(query), {
+  return fetch(url + "?" + queryString.stringify(query), {
     headers: {
       Authorization: auth_header,
       "X-Yahoo-App-Id": app_id

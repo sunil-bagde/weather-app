@@ -1,4 +1,5 @@
 const express = require('express');
+
 const {
   getWeather, 
 } = require('../controllers/wheather');
