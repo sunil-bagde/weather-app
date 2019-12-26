@@ -1,6 +1,6 @@
 # Weather app
 
-## clone respostory
+## clone repository
 ```sh
   git clone https://github.com/im-sunil/weather-app.git
 
