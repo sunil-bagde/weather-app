@@ -14,7 +14,7 @@
     "dotenv": "^8.2.0",
     "encodeurl": "^1.0.2",
     "eslint": "^6.8.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "morgan": "^1.9.1",
     "node-fetch": "^2.6.0",
     "oauth": "^0.9.15",
